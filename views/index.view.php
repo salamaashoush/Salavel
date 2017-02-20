@@ -1,15 +1,8 @@
 <?php $title="Home";?>
 <?php require 'partial/header.php';?>
-        <ul>
-            <?php foreach ($tasks as $task): ?>
-                <li>
-                    <?php if($task->complated): ?>
-                        <strike><?=$task->description?></strike>
-                    <?php else: ?>
-                        <?=$task->description?>
-                    <?php endif ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+<form action="/add" method="POST">
+    <input type="text" name="name">
+    <input type="submit" value="submit">
+</form>
 <?php require 'partial/footer.php';?>
 
