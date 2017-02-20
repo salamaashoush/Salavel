@@ -11,8 +11,10 @@ return array(
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
     'Composer\\Autoload\\ComposerStaticInitda55cc5be1ebcf11b5595aa5262a2f77' => $vendorDir . '/composer/autoload_static.php',
     'Connection' => $baseDir . '/core/database/connection.php',
+    'PagesController' => $baseDir . '/controllers/PagesController.php',
     'QueryBuilder' => $baseDir . '/core/database/QueryBuilder.php',
     'Request' => $baseDir . '/core/request.php',
     'Router' => $baseDir . '/core/router.php',
     'Task' => $baseDir . '/models/Task.php',
+    'TasksController' => $baseDir . '/controllers/TasksController.php',
 );
