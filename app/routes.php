@@ -2,5 +2,9 @@
 $router->get('','PagesController@home');
 $router->get('about','PagesController@about');
 $router->get('contact','PagesController@contact');
-$router->get('tasks','TasksController@index');
+$router->get('tasks{$id}','TasksController@index');
 $router->post('tasks','TasksController@store');
+$router->post('login','AuthController@login');
+$router->post('register','AuthController@register');
+$router->get('login','AuthController@showlogin');
+$router->get('register','AuthController@showregister');

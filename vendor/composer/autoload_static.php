@@ -7,11 +7,15 @@ namespace Composer\Autoload;
 class ComposerStaticInitda55cc5be1ebcf11b5595aa5262a2f77
 {
     public static $classMap = array (
+        'App\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/controllers/AuthController.php',
         'App\\Controllers\\PagesController' => __DIR__ . '/../..' . '/app/controllers/PagesController.php',
         'App\\Controllers\\TasksController' => __DIR__ . '/../..' . '/app/controllers/TasksController.php',
         'App\\Core\\App' => __DIR__ . '/../..' . '/core/app.php',
+        'App\\Core\\Controller' => __DIR__ . '/../..' . '/core/Controller.php',
         'App\\Core\\Request' => __DIR__ . '/../..' . '/core/request.php',
+        'App\\Core\\Response' => __DIR__ . '/../..' . '/core/Response.php',
         'App\\Core\\Router' => __DIR__ . '/../..' . '/core/router.php',
+        'App\\Core\\Validator' => __DIR__ . '/../..' . '/core/Validator.php',
         'App\\Models\\Task' => __DIR__ . '/../..' . '/app/models/Task.php',
         'ComposerAutoloaderInitda55cc5be1ebcf11b5595aa5262a2f77' => __DIR__ . '/..' . '/composer/autoload_real.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',

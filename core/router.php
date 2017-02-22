@@ -28,25 +28,26 @@ class Router{
         $this->routes['POST'][$uri]=$controller;
     }
 
-    public function direct($uri,$requestType)
+    public function direct($request)
     {
 
-        if(array_key_exists($uri,$this->routes[$requestType])){
-            return $this->callAction(
-                ... explode('@',$this->routes[$requestType][$uri])
+        if(array_key_exists($request->uri(),$this->routes[$request->method()])){
+            return $this->callAction($request,
+                ... explode('@',$this->routes[$request->method()][$request->uri()])
+
             );
         }
         throw new Exception("No route defined for this URI");
 
     }
 
-    protected function callAction($controller,$action)
+    protected function callAction($request,$controller,$action)
     {
         $controller="App\\Controllers\\{$controller}";
-        $controller=new $controller;
+        $controller=new $controller();
         if(! method_exists($controller,$action)){
             throw new Exception("{$controller} does not respond to the {$action} action.");
         }
-        return $controller->$action();
+        return $controller->$action($request);
     }
 }
