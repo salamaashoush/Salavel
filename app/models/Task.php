@@ -1,15 +1,8 @@
 <?php
 namespace App\Models;
-class Task{
-    public $description;
-    public $complated;
+use App\Core\Model;
 
-    public function isComplate()
-    {
-        return $this->complated;
-    }
-    public function complate()
-    {
-        $this->complated=true;
-    }
+class Task extends Model {
+    protected $table='todos';
+
 }

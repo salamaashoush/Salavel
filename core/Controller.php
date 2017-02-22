@@ -13,6 +13,23 @@ class Controller
 {
     protected $validator;
     protected $request;
+    protected $model;
+
+    /**
+     * @return mixed
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
+     * @param mixed $model
+     */
+    public function setModel($model)
+    {
+        $this->model = $model;
+    }
 
     /**
      * @return mixed

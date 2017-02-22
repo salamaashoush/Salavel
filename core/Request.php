@@ -2,12 +2,12 @@
 namespace App\Core;
 
 class Request{
-    public  function uri()
+    public function uri()
     {
         return trim(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH),'/');
     }
 
-    public  function method()
+    public function method()
     {
         return $_SERVER['REQUEST_METHOD'];
     }
