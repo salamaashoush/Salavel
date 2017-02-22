@@ -8,3 +8,8 @@ $router->post('login','AuthController@login');
 $router->post('register','AuthController@register');
 $router->get('login','AuthController@showlogin');
 $router->get('register','AuthController@showregister');
+$router->get('test',function ($request){
+    $query=$request->getQuery();
+    var_dump($query);
+});
+$router->resource('users','UserController');
