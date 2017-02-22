@@ -7,8 +7,7 @@ class PagesController extends Controller {
 
     public function home(Request $request)
     {
-        $tasks=App::get('database')->selectAll('todos');
-        return view('index',['tasks'=>$tasks]);
+        return view('index');
     }
 
     public function about(Request $request)

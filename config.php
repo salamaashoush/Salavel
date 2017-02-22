@@ -1,7 +1,7 @@
 <?php
 return [
     'database'=>[
-        'name'=>'mytodo',
+        'name'=>'salamadb',
         'username'=>'root',
         'password'=>'root',
         'connection'=>'mysql:host=localhost;',
