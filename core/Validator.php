@@ -18,7 +18,8 @@ class Validator
             $rules=explode("|",$rules);
             foreach ($rules as $rule) {
                 if(preg_match("/(.)+:(.)+/",$rule)){
-                    //handle max or min
+                    $rule=explode(":",$rule);
+                    $this->parsKVRule($request,$field,$rule);
                 }else{
                    $this->parsRule($request,$field,$rule);
                 }
@@ -48,6 +49,22 @@ class Validator
             case "url":
                 if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$value)) {
                     $this->errors[$field][] = "Invalid URL";
+                }
+                break;
+        }
+    }
+    protected function parsKVRule($request, $field, $rule)
+    {
+        $value=$request->get($field);
+        switch ($rule[0]){
+            case "max":
+                if(strlen($value)>$rule[1]){
+                    $this->errors[$field][]="not allowed more than $rule[1] character";
+                }
+                break;
+            case "min":
+                if(strlen($value)<$rule[1]){
+                    $this->errors[$field][]="at least $rule[1] character";
                 }
                 break;
         }

@@ -18,8 +18,8 @@ class AuthController extends Controller
     }
     public function login(Request $request){
         $errors=$this->validator->validate($request,[
-            'name'=>'required',
-            'email'=>'required|email'
+            'name'=>'required|max:5',
+            'email'=>'required|email|min:5'
         ]);
         return view('index',['errors'=>$errors]);
     }
