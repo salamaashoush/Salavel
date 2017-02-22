@@ -12,7 +12,7 @@ class ComposerStaticInitda55cc5be1ebcf11b5595aa5262a2f77
         'App\\Controllers\\PostController' => __DIR__ . '/../..' . '/app/controllers/PostController.php',
         'App\\Controllers\\TasksController' => __DIR__ . '/../..' . '/app/controllers/TasksController.php',
         'App\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/controllers/UserController.php',
-        'App\\Core\\App' => __DIR__ . '/../..' . '/core/app.php',
+        'App\\Core\\App' => __DIR__ . '/../..' . '/core/App.php',
         'App\\Core\\Controller' => __DIR__ . '/../..' . '/core/Controller.php',
         'App\\Core\\CustomException' => __DIR__ . '/../..' . '/core/Session.php',
         'App\\Core\\ExpiredSessionException' => __DIR__ . '/../..' . '/core/Session.php',

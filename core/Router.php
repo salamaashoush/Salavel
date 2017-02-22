@@ -8,6 +8,7 @@ class Router{
         'PUT'=>[],
         'DELETE'=>[]
     ];
+    protected $resoures=[];
     protected $callbacks;
     public static function load($file)
     {
@@ -50,6 +51,7 @@ class Router{
         $this->routes['PUT'][$uri."/{{$uri}}"]=$controller."@update";
         $this->routes['DELETE'][$uri."/{{$uri}}"]=$controller."@destroy";
         $this->routes['GET'][$uri."/{{$uri}}/edit"]=$controller."@edit";
+        $this->resoures[$uri]=$controller;
     }
 
     public function direct($request)
@@ -57,7 +59,7 @@ class Router{
 
         if(array_key_exists($request->uri(),$this->routes[$request->method()])){
             if(is_callable($this->routes[$request->method()][$request->uri()])){
-                $this->routes[$request->method()][$request->uri()]($request);
+                App::call($this->routes[$request->method()][$request->uri()],$request);
             }else{
                 return $this->callAction($request,
                     ... explode('@',$this->routes[$request->method()][$request->uri()])
@@ -72,8 +74,14 @@ class Router{
 
     protected function callAction($request,$controller,$action)
     {
+
+        $res=explode("/",$request->uri());
+        if($controller==$this->resources[$res[0]]){
+
+        }
         $controller="App\\Controllers\\{$controller}";
         $controller=new $controller();
+
         if(! method_exists($controller,$action)){
             throw new \Exception("{$controller} does not respond to the {$action} action.");
         }
@@ -99,6 +107,12 @@ class Router{
         }
 
     }
-
+// private function parseWildCard($model,$uri){
+//        $route=;
+//     $pattern = '/'.$model.'(\/)([0-9]+)/';
+//     $replacement = '{${2}}';
+//     if()
+//     preg_replace($pattern, $replacement, $uri);
+// }
 
 }

@@ -11,7 +11,7 @@ return array(
     'App\\Controllers\\PostController' => $baseDir . '/app/controllers/PostController.php',
     'App\\Controllers\\TasksController' => $baseDir . '/app/controllers/TasksController.php',
     'App\\Controllers\\UserController' => $baseDir . '/app/controllers/UserController.php',
-    'App\\Core\\App' => $baseDir . '/core/app.php',
+    'App\\Core\\App' => $baseDir . '/core/App.php',
     'App\\Core\\Controller' => $baseDir . '/core/Controller.php',
     'App\\Core\\CustomException' => $baseDir . '/core/Session.php',
     'App\\Core\\ExpiredSessionException' => $baseDir . '/core/Session.php',

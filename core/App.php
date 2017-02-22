@@ -19,4 +19,8 @@ class App
         return static::$registry[$key];
     }
 
+    public static function call($callable, $data)
+    {
+        return $callable($data);
+    }
 }
