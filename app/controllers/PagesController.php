@@ -1,21 +1,20 @@
 <?php
 namespace App\Controllers;
-use App\Core\App;
 use App\Core\Controller;
 use App\Core\Request;
 class PagesController extends Controller {
 
-    public function home(Request $request)
+    public function home()
     {
         return view('index');
     }
 
-    public function about(Request $request)
+    public function about()
     {
         return view('about');
     }
 
-    public function contact(Request $request)
+    public function contact()
     {
         return view('contact');
     }
