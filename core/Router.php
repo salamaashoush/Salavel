@@ -36,9 +36,9 @@ class Router{
     public function post($uri,$controller=null,callable $callback=null)
     {
         if(is_null($controller)&&!is_null($callback)){
-            $this->routes['GET'][$uri]=$callback;
+            $this->callbacks=$callback;
         }else if(is_null($callback)&&!is_null($controller)){
-            $this->routes['GET'][$uri]=$controller;
+            $this->routes['POST'][$uri]=$controller;
         }else{
             throw new \Exception("you must specify callback or controller for the route");
         }
@@ -47,7 +47,7 @@ class Router{
     public function put($uri,$controller=null,callable $callback=null)
     {
         if(is_null($controller)&&!is_null($callback)){
-            $this->routes['PUT'][$uri]=$callback;
+            $this->callbacks=$callback;
         }else if(is_null($callback)&&!is_null($controller)){
             $this->routes['PUT'][$uri]=$controller;
         }else{
@@ -58,7 +58,7 @@ class Router{
     public function delete($uri,$controller=null,callable $callback=null)
     {
         if(is_null($controller)&&!is_null($callback)){
-            $this->routes['DELETE'][$uri]=$callback;
+            $this->callbacks=$callback;
         }else if(is_null($callback)&&!is_null($controller)){
             $this->routes['DELETE'][$uri]=$controller;
         }else{

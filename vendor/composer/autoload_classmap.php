@@ -29,6 +29,7 @@ return array(
     'App\\Core\\SessionHandlerException' => $baseDir . '/core/Session.php',
     'App\\Core\\SessionHttpOnlyCookieException' => $baseDir . '/core/Session.php',
     'App\\Core\\SessionUseOnlyCookiesException' => $baseDir . '/core/Session.php',
+    'App\\Core\\Uploader' => $baseDir . '/core/Uploader.php',
     'App\\Core\\Validator' => $baseDir . '/core/Validator.php',
     'App\\Models\\Comment' => $baseDir . '/app/models/Comment.php',
     'App\\Models\\Post' => $baseDir . '/app/models/Post.php',

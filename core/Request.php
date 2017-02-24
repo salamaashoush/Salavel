@@ -86,4 +86,16 @@ class Request{
         return false;
     }
 
+    public function getFile($key)
+    {
+        if(isset($_FILES[$key])){
+            return $_FILES[$key];
+        }
+        return false;
+    }
+
+    public function getFiles()
+    {
+        return $_FILES;
+    }
 }

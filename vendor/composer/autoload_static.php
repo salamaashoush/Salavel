@@ -30,6 +30,7 @@ class ComposerStaticInitda55cc5be1ebcf11b5595aa5262a2f77
         'App\\Core\\SessionHandlerException' => __DIR__ . '/../..' . '/core/Session.php',
         'App\\Core\\SessionHttpOnlyCookieException' => __DIR__ . '/../..' . '/core/Session.php',
         'App\\Core\\SessionUseOnlyCookiesException' => __DIR__ . '/../..' . '/core/Session.php',
+        'App\\Core\\Uploader' => __DIR__ . '/../..' . '/core/Uploader.php',
         'App\\Core\\Validator' => __DIR__ . '/../..' . '/core/Validator.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/models/Comment.php',
         'App\\Models\\Post' => __DIR__ . '/../..' . '/app/models/Post.php',
