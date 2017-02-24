@@ -19,8 +19,8 @@ class UserController extends Controller implements ResourceInterface
 
     function __construct()
     {
-        $this->validator=new Validator();
         $this->model=new User();
+        $this->validator=new Validator();
     }
     public function index()
     {
@@ -43,7 +43,7 @@ class UserController extends Controller implements ResourceInterface
                 'password'=>'required|min:8'
             ]);
             if($errors){
-                redirect('users',$errors);
+                redirect('users',['errors'=>$errors]);
             }else{
                 $this->model->create([
                     'name'=>$request->get('name'),
@@ -51,7 +51,7 @@ class UserController extends Controller implements ResourceInterface
                     'password'=>$request->get('password')
                 ]);
                 $users= $this->model->all();
-                return view('users/index',['users'=>$users,'errors'=>$errors]);
+                return view('users/index',['users'=>$users]);
             }
         }
 

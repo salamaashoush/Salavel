@@ -8,12 +8,12 @@
 
 namespace App\Core;
 
-
 class Controller
 {
     protected $validator;
-    protected $request;
+    protected $response;
     protected $model;
+
 
     /**
      * @return mixed
@@ -62,6 +62,26 @@ class Controller
     {
         $this->request = $request;
     }
-    
+
+    /**
+     * @return mixed
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param mixed $response
+     */
+    public function setResponse($response)
+    {
+        $this->response = $response;
+    }
+
+    public function validate($request,$rulesset)
+    {
+        return $this->validate($request,$rulesset);
+    }
 
 }

@@ -1,9 +1,5 @@
 <?php
-try {
-    $response = \App\Core\Session::r('response');
-} catch (Exception $e) {
-    $e->getMessage();
-}
+$errors=getErrors();
 ?>
 <?php partial('header', ['title' => "about"]); ?>
 <h1>Users</h1>
@@ -23,5 +19,5 @@ try {
     <input type="text" name="password"><br>
     <input type="submit" value="Add">
 <?php close_form();?>
-<?php partial('errors',['errors'=>$response])?>
+<?php partial('errors',['errors'=>$errors])?>
 <?php partial('footer'); ?>

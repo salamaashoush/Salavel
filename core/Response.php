@@ -12,6 +12,7 @@ namespace App\Core;
 class Response
 {
     protected $errors;
+    protected $data;
 
     /**
      * @return mixed
@@ -28,5 +29,22 @@ class Response
     {
         $this->errors = $errors;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param mixed $data
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
 
 }
