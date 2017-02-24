@@ -1,5 +1,5 @@
 <?php $title="Tasks";?>
-<?php require 'partial/header.php';?>
+<?php require 'partial/header.part.php';?>
 <?php foreach ($tasks as $task): ?>
     <li><?=$task->description?>
 <?php endforeach; ?>
@@ -7,5 +7,5 @@
     <input type="text" name="desc">
     <input type="submit" value="submit">
 </form>
-<?php require 'partial/footer.php';?>
+<?php require 'partial/footer.part.php';?>
 

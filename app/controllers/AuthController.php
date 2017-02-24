@@ -3,7 +3,6 @@
 namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Request;
-use App\Core\Response;
 use App\Core\Validator;
 use App\Models\User;
 
@@ -23,7 +22,12 @@ class AuthController extends Controller
             'name'=>'required|max:5',
             'email'=>'required|email|min:5'
         ]);
-        return view('index',['errors'=>$errors]);
+        if($errors){
+            redirect('register',$errors);
+        }else{
+            return view('index');
+        }
+
     }
     public function showregister(Request $request){
         return view('register');

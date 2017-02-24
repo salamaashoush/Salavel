@@ -1,5 +1,5 @@
 <?php $title="Contact";?>
-<?php require 'partial/header.php';?>
+<?php require 'partial/header.part.php';?>
 <form action="/login" method="post">
     <label for="name">Neme</label>
     <input type="text" name="name">
@@ -7,4 +7,4 @@
     <input type="text" name="email">
     <input type="submit" value="Submit">
 </form>
-<?php require 'partial/footer.php';?>
+<?php require 'partial/footer.part.php';?>

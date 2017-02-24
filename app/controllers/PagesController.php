@@ -6,17 +6,17 @@ class PagesController extends Controller {
 
     public function home()
     {
-        return view('index');
+        return view('pages/index');
     }
 
     public function about()
     {
-        return view('about');
+        return view('pages/about');
     }
 
     public function contact()
     {
-        return view('contact');
+        return view('pages/contact');
     }
 
 }

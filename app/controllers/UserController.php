@@ -12,14 +12,20 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Core\ResourceInterface;
-
+use App\Core\Validator;
+use App\Models\User;
 class UserController extends Controller implements ResourceInterface
 {
 
+    function __construct()
+    {
+        $this->validator=new Validator();
+        $this->model=new User();
+    }
     public function index()
     {
-        // TODO: Implement index() method.
-        echo "it is working";
+       $users=$this->model->all();
+       return view('users/index',['users'=>$users]);
     }
 
     public function create()
@@ -30,8 +36,22 @@ class UserController extends Controller implements ResourceInterface
 
     public function store(Request $request)
     {
-        // TODO: Implement store() method.
-        echo "salama";
+        $errors=$this->validator->validate($request,[
+            'name'=>'required',
+            'email'=>'required|email',
+            'password'=>'required|min:8'
+        ]);
+        if($errors){
+            redirect('users',$errors);
+        }else{
+            $this->model->create([
+                'name'=>$request->get('name'),
+                'email'=>$request->get('email'),
+                'password'=>$request->get('password')
+            ]);
+            $users= $this->model->all();
+            return view('users/index',['users'=>$users,'errors'=>$errors]);
+        }
     }
 
     public function show($id)
@@ -54,6 +74,8 @@ class UserController extends Controller implements ResourceInterface
 
     public function destroy($id)
     {
-        // TODO: Implement destroy() method.
+       $this->model->delete(['id'=>$id]);
+        $users= $this->model->all();
+        return view('users/index',['users'=>$users]);
     }
 }

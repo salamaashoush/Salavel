@@ -6,4 +6,4 @@
     <?php resource("css","style")?>
 </head>
 <body>
-<?php require_once 'nav.php';?>
+<?php partial('nav');?>

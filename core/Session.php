@@ -19,7 +19,6 @@ namespace App\Core;
  * }
  * ?>
  */
-include_once 'CustomException.php';
 if ( !class_exists('CustomException') ) {
     class CustomException extends \Exception {}
 }
@@ -33,23 +32,9 @@ class SessionCookieSecureException extends SessionHandlerException {}
 //defined('CHECK_ACCESS') or die('Direct access is not allowed.');
 class Session
 {
-    /**
-     * Session Age.
-     *
-     * The number of seconds of inactivity before a session expires.
-     *
-     * @var integer
-     */
+
     protected static $SESSION_AGE = 1800;
 
-    /**
-     * Writes a value to the current session data.
-     *
-     * @param string $key String identifier.
-     * @param mixed $value Single value or array of values to be written.
-     * @return mixed Value or array of values written.
-     * @throws InvalidArgumentTypeException Session key is not a string value.
-     */
     public static function write($key, $value)
     {
         if ( !is_string($key) )
@@ -60,28 +45,13 @@ class Session
         return $value;
     }
 
-    /**
-     * Alias for {@link Session::write()}.
-     *
-     * @see Session::write()
-     * @param string $key String identifier.
-     * @param mixed $value Single value or array of values to be written.
-     * @return mixed Value or array of values written.
-     * @throws InvalidArgumentTypeException Session key is not a string value.
-     */
+
     public static function w($key, $value)
     {
         return self::write($key, $value);
     }
 
-    /**
-     * Reads a specific value from the current session data.
-     *
-     * @param string $key String identifier.
-     * @param boolean $child Optional child identifier for accessing array elements.
-     * @return mixed Returns a string value upon success.  Returns false upon failure.
-     * @throws InvalidArgumentTypeException Session key is not a string value.
-     */
+
     public static function read($key, $child = false)
     {
         if ( !is_string($key) )
@@ -106,27 +76,13 @@ class Session
         return false;
     }
 
-    /**
-     * Alias for {@link Session::read()}.
-     *
-     * @see Session::read()
-     * @param string $key String identifier.
-     * @param boolean $child Optional child identifier for accessing array elements.
-     * @return mixed Returns a string value upon success.  Returns false upon failure.
-     * @throws InvalidArgumentTypeException Session key is not a string value.
-     */
+
     public static function r($key, $child = false)
     {
         return self::read($key, $child);
     }
 
-    /**
-     * Deletes a value from the current session data.
-     *
-     * @param string $key String identifying the array key to delete.
-     * @return void
-     * @throws InvalidArgumentTypeException Session key is not a string value.
-     */
+
     public static function delete($key)
     {
         if ( !is_string($key) )
@@ -136,48 +92,26 @@ class Session
         self::_age();
     }
 
-    /**
-     * Alias for {@link Session::delete()}.
-     *
-     * @see Session::delete()
-     * @param string $key String identifying the key to delete from session data.
-     * @return void
-     * @throws InvalidArgumentTypeException Session key is not a string value.
-     */
+
     public static function d($key)
     {
         self::delete($key);
     }
 
-    /**
-     * Echos current session data.
-     *
-     * @return void
-     */
+
     public static function dump()
     {
         self::_init();
         echo nl2br(print_r($_SESSION));
     }
-    /**
-     * Starts or resumes a session by calling {@link Session::_init()}.
-     *
-     * @see Session::_init()
-     * @return boolean Returns true upon success and false upon failure.
-     * @throws SessionDisabledException Sessions are disabled.
-     */
+
     public static function start()
     {
         // this function is extraneous
         return self::_init();
     }
 
-    /**
-     * Expires a session if it has been inactive for a specified amount of time.
-     *
-     * @return void
-     * @throws ExpiredSessionException() Throws exception when read or write is attempted on an expired session.
-     */
+
     private static function _age()
     {
         $last = isset($_SESSION['LAST_ACTIVE']) ? $_SESSION['LAST_ACTIVE'] : false ;
@@ -190,11 +124,7 @@ class Session
         $_SESSION['LAST_ACTIVE'] = time();
     }
 
-    /**
-     * Returns current session cookie parameters or an empty array.
-     *
-     * @return array Associative array of session cookie parameters.
-     */
+
     public static function params()
     {
         $r = array();
@@ -205,11 +135,7 @@ class Session
         return $r;
     }
 
-    /**
-     * Closes the current session and releases session file lock.
-     *
-     * @return boolean Returns true upon success and false upon failure.
-     */
+
     public static function close()
     {
         if ( '' !== session_id() )
@@ -219,22 +145,13 @@ class Session
         return true;
     }
 
-    /**
-     * Alias for {@link Session::close()}.
-     *
-     * @see Session::close()
-     * @return boolean Returns true upon success and false upon failure.
-     */
+
     public static function commit()
     {
         return self::close();
     }
 
-    /**
-     * Removes session data and destroys the current session.
-     *
-     * @return void
-     */
+
     public static function destroy()
     {
         if ( '' !== session_id() )
@@ -253,12 +170,7 @@ class Session
         }
     }
 
-    /**
-     * Initializes a new secure session or resumes an existing session.
-     *
-     * @return boolean Returns true upon success and false upon failure.
-     * @throws SessionDisabledException Sessions are disabled.
-     */
+
     private static function _init()
     {
         if (function_exists('session_status'))

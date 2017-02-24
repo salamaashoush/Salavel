@@ -73,7 +73,7 @@ class Model
 
     public function delete($condition)
     {
-        return $this->builder->delete($this->table,$fields,$condition);
+        return $this->builder->delete($this->table,$condition);
 
     }
 }

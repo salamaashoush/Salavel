@@ -44,6 +44,28 @@ class Router{
         }
     }
 
+    public function put($uri,$controller=null,callable $callback=null)
+    {
+        if(is_null($controller)&&!is_null($callback)){
+            $this->routes['PUT'][$uri]=$callback;
+        }else if(is_null($callback)&&!is_null($controller)){
+            $this->routes['PUT'][$uri]=$controller;
+        }else{
+            throw new \Exception("you must specify callback or controller for the route");
+        }
+    }
+
+    public function delete($uri,$controller=null,callable $callback=null)
+    {
+        if(is_null($controller)&&!is_null($callback)){
+            $this->routes['DELETE'][$uri]=$callback;
+        }else if(is_null($callback)&&!is_null($controller)){
+            $this->routes['DELETE'][$uri]=$controller;
+        }else{
+            throw new \Exception("you must specify callback or controller for the route");
+        }
+    }
+
     public function resource($uri,$controller){
         $this->routes['POST'][$uri]=$controller."@store";
         $this->routes['GET'][$uri]=$controller."@index";
@@ -77,7 +99,8 @@ class Router{
     {
         $controller="App\\Controllers\\{$controller}";
         $controller=new $controller();
-        $id=isset($this->parameters[0])?$this->parameters[0]:null;
+        $urientry=explode("/",$request->uri)[0];
+        $id=$request->getParameters($urientry);
         if(! method_exists($controller,$action)){
             throw new \Exception("{$controller} does not respond to the {$action} action.");
         }
@@ -98,7 +121,7 @@ class Router{
                 return $controller->$action($id);
                 break;
             default:
-                return $controller->$action();
+                return $controller->$action($request);
 
         }
 
@@ -109,55 +132,11 @@ class Router{
         $string = $request->uri();
         $pattern = '/([0-9]+)/';
         $replacement = '{id}';
-        preg_match($pattern, $string, $this->parameters);;
+        $urientry = explode("/",$request->uri())[0];
+        preg_match($pattern, $string, $parameters);
+        $request->setParameters($urientry,$parameters[0]);
         $uri = preg_replace($pattern, $replacement, $string);
         return $uri;
     }
-
-//    public function matches($url)
-//    {
-//        $pattern = $this->pattern;
-//
-//        // get keys
-//        preg_match_all("#:([a-zA-Z0-9]+)#", $pattern, $keys);
-//
-//        if (sizeof($keys) && sizeof($keys[0]) && sizeof($keys[1]))
-//        {
-//            $keys = $keys[1];
-//        }
-//        else
-//        {
-//            // no keys in the pattern, return a simple match
-//            return preg_match("#^{$pattern}$#", $url);
-//        }
-//
-//        // normalize route pattern
-//        $pattern = preg_replace("#(:[a-zA-Z0-9]+)#", "([a-zA-Z0-9-_]+)", $pattern);
-//
-//        // check values
-//        preg_match_all("#^{$pattern}$#", $url, $values);
-//
-//        if (sizeof($values) && sizeof($values[0]) && sizeof($values[1]))
-//        {
-//            // unset the matched url
-//            unset($values[0]);
-//
-//            // values found, modify parameters and return
-//            $derived = array_combine($keys, ArrayMethods::flatten($values));
-//            $this->parameters = array_merge($this->parameters, $derived);
-//
-//            return true;
-//        }
-//
-//        return false;
-//    }
-//}
-// private function parseWildCard($model,$uri){
-//        $route=;
-//     $pattern = '/'.$model.'(\/)([0-9]+)/';
-//     $replacement = '{${2}}';
-//     if()
-//     preg_replace($pattern, $replacement, $uri);
-// }
 
 }

@@ -32,8 +32,8 @@ class QueryBuilder{
 
     public function update($table,$fields,$condition)
     {
-        $fieldsKV=implode(',',array_map_assoc(function($k,$v){return "$k = $v";},$fields));
-        $conditionKV=implode('and',array_map_assoc(function($k,$v){return "$k = $v";},$condition));
+        $fieldsKV=implode(',',$this->array_map_assoc(function($k,$v){return "$k = $v";},$fields));
+        $conditionKV=implode('and',$this->array_map_assoc(function($k,$v){return "$k = $v";},$condition));
         $sql=sprintf(
             'update %s set %s where %s',
             $table,
@@ -51,7 +51,7 @@ class QueryBuilder{
 
     public function delete($table,$condition)
     {
-        $conditionKV=implode('and',array_map_assoc(function($k,$v){return "$k = $v";},$condition));
+        $conditionKV=implode('and',$this->array_map_assoc(function($k,$v){return "$k = ".'"'.$v.'"';},$condition));
         $sql=sprintf(
             'delete from %s where %s',
             $table,
@@ -68,7 +68,7 @@ class QueryBuilder{
 
     public function select($table,$fields,$condition)
     {
-        $conditionKV=implode('and',array_map_assoc(function($k,$v){return "$k = $v";},$condition));
+        $conditionKV=implode('and',$this->array_map_assoc(function($k,$v){return "$k = $v";},$condition));
         $sql=sprintf(
             'select %s from %s where %',
             implode(', ',$fields),
