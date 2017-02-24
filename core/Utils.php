@@ -12,7 +12,7 @@
     }
 
     function redirect($path,$data){
-        \App\Core\Session::w('response',$data);
+        $_SESSION['response']=$data;
         header("Location: /{$path}");
     }
     function resource($type,$name){
@@ -29,13 +29,35 @@ function method_field($method){
     return '<input type="hidden" name="_method" value='.$method.' />';
 }
 function start_form($method,$action,$option=null){
-    if($method!='post'||$method!='get'){
+    if($method==='post'||$method==='get'){
+        echo '<form action="'.$action.'" method="'.$method.'" >';
+        echo csrf_field();
+    }else{
         echo '<form action="'.$action.'" method="post" '.'>';
         echo method_field($method);
-    }else{
-        echo '<form action="'.$action.'" method="'.$method.' >';
+        echo csrf_field();
+
     }
 }
 function close_form(){
     echo '</form>';
+}
+function generateCSRF(){
+    if (empty($_SESSION['token'])) {
+        $_SESSION['token']=bin2hex(random_bytes(32));
+    }
+    return $_SESSION['token'];
+}
+function verifyCSRF($request){
+    if ($request->getCSRF()) {
+        if (hash_equals($_SESSION['token'], $request->getCSRF())) {
+           return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+function csrf_field(){
+    return '<input type="hidden" name="_token" value='.generateCSRF().' />';
 }

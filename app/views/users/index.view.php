@@ -14,7 +14,7 @@ try {
         <?php close_form();?>
     </p>
 <?php endforeach; ?>
-<form action="/users" method="post">
+<?php start_form("post","/users")?>
     <label for="name">Name</label>
     <input type="text" name="name"><br>
     <label for="name">Email</label>
@@ -22,6 +22,6 @@ try {
     <label for="name">Password</label>
     <input type="text" name="password"><br>
     <input type="submit" value="Add">
-</form>
+<?php close_form();?>
 <?php partial('errors',['errors'=>$response])?>
 <?php partial('footer'); ?>

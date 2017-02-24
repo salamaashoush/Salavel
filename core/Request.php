@@ -78,5 +78,12 @@ class Request{
         $this->parameters[$uri]=$parameters;
     }
 
+    public function getCSRF()
+    {
+        if(isset($_POST['_token'])){
+            return $_POST['_token'];
+        }
+        return false;
+    }
 
 }

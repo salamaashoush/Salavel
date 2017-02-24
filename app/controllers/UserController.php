@@ -36,22 +36,25 @@ class UserController extends Controller implements ResourceInterface
 
     public function store(Request $request)
     {
-        $errors=$this->validator->validate($request,[
-            'name'=>'required',
-            'email'=>'required|email',
-            'password'=>'required|min:8'
-        ]);
-        if($errors){
-            redirect('users',$errors);
-        }else{
-            $this->model->create([
-                'name'=>$request->get('name'),
-                'email'=>$request->get('email'),
-                'password'=>$request->get('password')
+        if(verifyCSRF($request)){
+            $errors=$this->validator->validate($request,[
+                'name'=>'required',
+                'email'=>'required|email',
+                'password'=>'required|min:8'
             ]);
-            $users= $this->model->all();
-            return view('users/index',['users'=>$users,'errors'=>$errors]);
+            if($errors){
+                redirect('users',$errors);
+            }else{
+                $this->model->create([
+                    'name'=>$request->get('name'),
+                    'email'=>$request->get('email'),
+                    'password'=>$request->get('password')
+                ]);
+                $users= $this->model->all();
+                return view('users/index',['users'=>$users,'errors'=>$errors]);
+            }
         }
+
     }
 
     public function show($id)

@@ -99,7 +99,7 @@ class Router{
     {
         $controller="App\\Controllers\\{$controller}";
         $controller=new $controller();
-        $urientry=explode("/",$request->uri)[0];
+        $urientry=explode("/",$request->uri())[0];
         $id=$request->getParameters($urientry);
         if(! method_exists($controller,$action)){
             throw new \Exception("{$controller} does not respond to the {$action} action.");
@@ -134,7 +134,9 @@ class Router{
         $replacement = '{id}';
         $urientry = explode("/",$request->uri())[0];
         preg_match($pattern, $string, $parameters);
-        $request->setParameters($urientry,$parameters[0]);
+        if(!empty($parameters)){
+            $request->setParameters($urientry,$parameters[0]);
+        }
         $uri = preg_replace($pattern, $replacement, $string);
         return $uri;
     }
