@@ -1,9 +1,5 @@
 <?php
-try {
-    $response = Session::r('response');
-} catch (Exception $e) {
-    $e->getMessage();
-}
+    $response = $_SESSION['response'];
 ?>
 <?php partial('header', [$title => "about"]); ?>
 <h1>Home</h1>

@@ -30,10 +30,10 @@ class QueryBuilder{
         }
     }
 
-    public function update($table,$fields,$condition)
+    public function update($table,$fields,$condition,$operator)
     {
-        $fieldsKV=implode(',',$this->array_map_assoc(function($k,$v){return "$k = $v";},$fields));
-        $conditionKV=implode('and',$this->array_map_assoc(function($k,$v){return "$k = $v";},$condition));
+        $fieldsKV=implode(',',$this->array_map_assoc(function($k,$v){return "$k =".'"'.$v.'"';},$fields));
+        $conditionKV=implode('and',$this->array_map_assoc(function($k,$v){return "$k .$operator ".'"'.$v.'"';},$condition));
         $sql=sprintf(
             'update %s set %s where %s',
             $table,
@@ -66,9 +66,9 @@ class QueryBuilder{
         }
     }
 
-    public function select($table,$fields,$condition)
+    public function select($table,$fields,$condition,$operator)
     {
-        $conditionKV=implode('and',$this->array_map_assoc(function($k,$v){return "$k = $v";},$condition));
+        $conditionKV=implode('and',$this->array_map_assoc(function($k,$v){return "$k .$operator ".'"'.$v.'"';},$condition));
         $sql=sprintf(
             'select %s from %s where %',
             implode(', ',$fields),
