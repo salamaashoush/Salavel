@@ -10,21 +10,17 @@ namespace App\Controllers;
 
 
 use App\Core\Controller;
+use App\Core\Helper;
 use App\Core\Request;
 use App\Core\ResourceInterface;
-use App\Core\Validator;
 use App\Models\User;
+
 class UserController extends Controller implements ResourceInterface
 {
 
-    function __construct()
-    {
-        $this->model=new User();
-        $this->validator=new Validator();
-    }
     public function index()
     {
-       $users=$this->model->all();
+       $users=User::all();
        return view('users/index',['users'=>$users]);
     }
 
@@ -77,8 +73,8 @@ class UserController extends Controller implements ResourceInterface
 
     public function destroy($id)
     {
-       $this->model->delete(['id'=>$id]);
-        $users= $this->model->all();
-        return view('users/index',['users'=>$users]);
+        $user=User::retrieveByPK($id);
+        $user->delete();
+        redirect('/users');
     }
 }

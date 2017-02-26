@@ -7,28 +7,15 @@
  */
 
 namespace App\Core;
+use App\Core\Validator;
 
 class Controller
 {
     protected $validator;
-    protected $response;
-    protected $model;
 
-
-    /**
-     * @return mixed
-     */
-    public function getModel()
+    function __construct()
     {
-        return $this->model;
-    }
-
-    /**
-     * @param mixed $model
-     */
-    public function setModel($model)
-    {
-        $this->model = $model;
+        $this->validator=new Validator();
     }
 
     /**
@@ -45,38 +32,6 @@ class Controller
     public function setValidator($validator)
     {
         $this->validator = $validator;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRequest()
-    {
-        return $this->request;
-    }
-
-    /**
-     * @param mixed $request
-     */
-    public function setRequest($request)
-    {
-        $this->request = $request;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
-    /**
-     * @param mixed $response
-     */
-    public function setResponse($response)
-    {
-        $this->response = $response;
     }
 
     public function validate($request,$rulesset)

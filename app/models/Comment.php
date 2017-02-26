@@ -9,9 +9,11 @@
 namespace App\Models;
 
 
-use App\Core\Model;
+use App\Core\DB\ORM;
 
-class Comment extends Model
+class Comment extends ORM
 {
-    protected $table='comments';
+    protected static $table='comments';
+    protected static $pk='id';
+
 }

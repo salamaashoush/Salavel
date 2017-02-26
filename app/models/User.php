@@ -9,9 +9,11 @@
 namespace App\Models;
 
 
-use App\Core\Model;
+use App\Core\DB\ORM;
 
-class User extends Model
+class User extends ORM
 {
-    protected $table='users';
+    protected static $table='users';
+    protected static $pk='id';
+
 }

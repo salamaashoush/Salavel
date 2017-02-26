@@ -9,9 +9,10 @@
 namespace App\Models;
 
 
-use App\Core\Model;
+use App\Core\DB\ORM;
 
-class Post extends Model
+class Post extends ORM
 {
-    protected $table='posts';
+    protected static $table='posts';
+    protected static $pk='id';
 }
