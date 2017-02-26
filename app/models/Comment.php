@@ -16,4 +16,8 @@ class Comment extends ORM
     protected static $table='comments';
     protected static $pk='id';
 
+    public function user()
+    {
+        return User::retrieveByField('id',$this->uid);
+    }
 }

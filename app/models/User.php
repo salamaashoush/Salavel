@@ -16,4 +16,11 @@ class User extends ORM
     protected static $table='users';
     protected static $pk='id';
 
+
+    public function posts()
+    {
+        return Post::retrieveByField('uid',$this->id);
+    }
+
+
 }

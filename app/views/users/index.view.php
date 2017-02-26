@@ -4,7 +4,7 @@ $errors=getErrors();
 <?php partial('header', ['title' => "about"]); ?>
 <h1>Users</h1>
 <?php foreach ($users as $user): ?>
-    <p>Name: <?=$user->name?>
+    <p>Name: <?=$user->username?>
         <?php start_form("DELETE","/users/".$user->id)?>
         <input type="submit" value="Delete">
         <?php close_form();?>

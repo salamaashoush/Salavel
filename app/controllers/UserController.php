@@ -21,7 +21,8 @@ class UserController extends Controller implements ResourceInterface
     public function index()
     {
        $users=User::all();
-       return view('users/index',['users'=>$users]);
+//       return view('users/index',['users'=>$users]);
+        echo json_encode($users);
     }
 
     public function create()
@@ -55,8 +56,11 @@ class UserController extends Controller implements ResourceInterface
 
     public function show($id)
     {
-        // TODO: Implement show() method.
-        echo $id;
+        $user=User::retrieveByPK($id);
+//        var_dump($user->posts());
+        foreach ($user->posts() as $post){
+            var_dump($post->comments());
+        }
     }
 
     public function edit($id)
