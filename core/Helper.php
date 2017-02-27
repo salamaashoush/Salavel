@@ -1,5 +1,9 @@
 <?php
 
+
+function public_dir(){
+    return "/public/";
+}
 function view($view, $data = [])
 {
     extract($data);
@@ -14,7 +18,7 @@ function partial($part, $data = [])
 
 function redirect($url, $data=[], $statusCode = 303)
 {
-    $_SESSION['response'] = $data;
+    \App\Core\Session::set('response' , $data);
     header('Location: ' . $url, true, $statusCode);
     die();
 }
@@ -22,13 +26,22 @@ function redirect($url, $data=[], $statusCode = 303)
 function resource($type, $name)
 {
     if ($type == 'css') {
-        echo '<link rel="stylesheet" href="' . "./public/${type}/${name}.${type}" . '" >';
+        echo '<link rel="stylesheet" href="' . public_dir()."${type}/${name}.${type}" . '" >';
     } else if ($type == 'js') {
-        echo '<script type="text/javascript" src="' . "./public/${type}/${name}.${type}" . '" ></script>';
+        echo '<script type="text/javascript" src="' . public_dir()."${type}/${name}.${type}" . '" ></script>';
     } else {
-        return "./public/${type}/${name}.${type}";
+        return public_dir()."${type}/${name}.${type}";
     }
-    return "./public/${type}/${name}.${type}";
+    return public_dir()."${type}/${name}.${type}";
+}
+function html_image($name,$option=['class'=>'','id'=>'']){
+    echo '<img src="' . public_dir()."images/${name}" . '" class="'.$option['class'].'id="'.$option['id'].'">';
+}
+function uploaded_image($name,$option=['class'=>'','id'=>'']){
+    echo '<img src="' . "/uploads/${name}" . '" class="'.$option['class'].'id="'.$option['id'].'">';
+}
+function html_link($url,$text,$option=['class'=>'','id'=>'']){
+    echo '<a href="' .$url. '" class="'.$option['class'].'id="'.$option['id'].'">'.$text."</a>";
 }
 
 function method_field($method)
@@ -122,7 +135,7 @@ function upload($file)
     ));
     if ($data['isComplete']) {
         $files = $data['data'];
-        print_r($files);
+        return $files;
     }
     if ($data['hasErrors']) {
         $errors = $data['errors'];
@@ -140,5 +153,16 @@ function onFilesRemoveCallback($removed_files)
     }
     return $removed_files;
 }
+
+function toJson($data)
+{
+    header('Access-Control-Allow-Origin: null');
+    header('Content-Type: application/json');
+    echo utf8_encode(json_encode($data));
+}
+ function session_id_field(){
+    echo '<input type = "hidden" name="PHPSESSID" value="'.session_id().'"/>';
+ }
+
 
 

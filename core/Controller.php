@@ -34,9 +34,5 @@ class Controller
         $this->validator = $validator;
     }
 
-    public function validate($request,$rulesset)
-    {
-        return $this->validate($request,$rulesset);
-    }
 
 }

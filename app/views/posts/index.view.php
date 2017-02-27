@@ -1,7 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: salamaashoush
- * Date: 24/02/17
- * Time: 07:08 م
- */
+$errors=getErrors();
+?>
+<?php partial('header', ['title' => "about"]); ?>
+<div class="ui container">
+    <h1>Posts</h1>
+    <?php if($posts):?>
+    <div class="ui items">
+        <?php foreach ($posts as $post): ?>
+            <?php partial('post',['post'=>$post]);?>
+        <?php endforeach; ?>
+    </div>
+    <?php endif;?>
+    <?php partial('errors',['errors'=>$errors])?>
+</div>
+
+<?php partial('footer'); ?>

@@ -18,7 +18,7 @@ class Post extends ORM
 
     public function user()
     {
-        return User::retrieveByField('id',$this->uid);
+        return User::retrieveByField('id',$this->uid)[0];
     }
 
     public function comments()

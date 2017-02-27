@@ -32,16 +32,16 @@ class Request{
             if(isset($_GET[$key])){
                 return $_GET[$key];
             }else{
-                throw new \Exception("$key is not found");
+                return false;
             }
         }else if($this->method()=='POST'){
             if(isset($_POST[$key])){
                 return $_POST[$key];
             }else{
-                throw new \Exception("$key is not found");
+                return false;
             }
         }else{
-            throw new \Exception("unsupported method");
+            return false;
         }
     }
 
@@ -97,5 +97,15 @@ class Request{
     public function getFiles()
     {
         return $_FILES;
+    }
+
+    public function saveToSession($errors=[])
+    {
+        Session::set('request',['fields'=>$this->getAll(),'errors'=>$errors]);
+    }
+
+    public function getLastFromSession()
+    {
+        return Session::get('request');
     }
 }

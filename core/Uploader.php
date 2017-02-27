@@ -115,12 +115,6 @@ class Uploader
         return $this->prepareFiles();
     }
 
-    /**
-     * setOptions method
-     *
-     * Merge options
-     * @param $options {Array}
-     */
     private function setOptions($options){
         if(!is_array($options)){return false;}
         $this->options = array_merge($this->options, $options);
