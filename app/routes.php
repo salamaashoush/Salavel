@@ -36,3 +36,4 @@ $router->post('test',function ($request){
 });
 $router->resource('users','UserController');
 $router->resource('posts','PostController');
+$router->resource('comments','CommentController');

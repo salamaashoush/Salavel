@@ -18,6 +18,10 @@ class Comment extends ORM
 
     public function user()
     {
-        return User::retrieveByField('id',$this->uid);
+        return User::retrieveByField('id',$this->uid)[0];
+    }
+    public function post()
+    {
+        return Post::retrieveByField('id',$this->pid)[0];
     }
 }

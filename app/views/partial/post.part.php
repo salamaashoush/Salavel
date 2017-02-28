@@ -11,14 +11,14 @@
         <div class="description">
             <p><?=$post->body?></p>
         </div>
-        <?php if(\App\Core\Session::isLogin()):?>
+        <?php if((\App\Core\Session::isLogin()&&\App\Core\Session::getLoginUser()->id==$post->uid)||\App\Core\Session::getLoginUser()->role=='admin'):?>
         <div class="extra">
-            <div class="ui small buttons">
+            <div class="ui buttons">
                 <?php start_form('get',"/posts/".$post->id."/edit")?>
-                <input type="submit" class="ui primary button" value="Edit">
+                <button type="submit" class="ui primary button" >Edit</button>
                 <?php close_form()?>
                 <?php start_form('delete',"/posts/".$post->id)?>
-                <input type="submit" class="ui red button" value="Delete">
+                <button type="submit" class="ui red button">Delete</button>
                 <?php close_form()?>
             </div>
         </div>
