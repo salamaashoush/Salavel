@@ -12,6 +12,7 @@ $router->get('search',function ($request){
    $posts=\App\Models\Post::retrieveByTitle($query);
    return view('posts/index',['posts'=>$posts]);
 });
+$router->get('rss','PagesController@rss');
 $router->get('push',function ($request){
     return view('push');
 });

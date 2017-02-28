@@ -19,6 +19,9 @@
                 Admin
             </a>
         <?php endif; ?>
+        <a class="item" href="/rss">
+            RSS
+        </a>
         <div class="right menu">
             <div class="ui category search item">
                 <div class="ui transparent icon input">

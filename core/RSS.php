@@ -70,7 +70,7 @@ class RSS  {
             $xml .= '<link>' . $rss_item['link'] . '</link>' . "\n";
             $xml .= '<description>' . $rss_item['description'] . '</description>' . "\n";
             $xml .= '<pubDate>' . $rss_item['pubDate'] . '</pubDate>' . "\n";
-            $xml .= '<category>' . $rss_item['category'] . '</category>' . "\n";
+//            $xml .= '<category>' . $rss_item['category'] . '</category>' . "\n";
             $xml .= '<source>' . $rss_item['source'] . '</source>' . "\n";
 
             if($this->full_feed) {
@@ -102,7 +102,7 @@ class RSS  {
         foreach($posts as $post) {
 
             // title
-            $a_rss_item['title'] = $post['title'];
+            $a_rss_item['title'] = $post->title;
 
             // link
             $a_rss_item['link'] = $this->site_url . '/posts/' . $post->id;
@@ -117,7 +117,7 @@ class RSS  {
 //            $a_rss_item['description'] .= $topic['description'];
 
             // pubdate -> configure appropriately to your environment
-            $date = new DateTime($post->updated_at);
+            $date = new \DateTime($post->updated_at);
             $a_rss_item['pubDate'] = $date->format("D, d M Y H:i:s O");
 
             // category
