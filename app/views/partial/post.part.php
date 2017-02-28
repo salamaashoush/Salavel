@@ -1,9 +1,9 @@
 <div class="item">
     <div class="image">
-        <?=html_image($post->image)?>
+        <?=uploaded_image($post->image)?>
     </div>
     <div class="content">
-        <?php html_link("posts/".$post->id,$post->title,['class'=>'header'])?>
+        <?php html_link("/posts/".$post->id,$post->title,['class'=>'header'])?>
         <div class="meta">
             <span>Author: <?php html_link("users/".$post->user()->id,$post->user()->username)?></span>
             <span>Last edit: <?=$post->updated_at?></span>

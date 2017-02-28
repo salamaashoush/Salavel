@@ -1,7 +1,7 @@
 <?php
 $errors=getErrors();
 ?>
-<?php partial('header', ['title' => "about"]); ?>
+<?php partial('header', ['title' => "Posts"]); ?>
 <div class="ui container">
     <h1>Posts</h1>
     <?php if($posts):?>

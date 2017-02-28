@@ -20,7 +20,7 @@ class Request{
     }
     public function method()
     {
-        if($_SERVER['REQUEST_METHOD']=='POST'&&isset($_POST['_method'])){
+        if(isset($_POST['_method'])){
             return strtoupper($_POST['_method']);
         }
         return $_SERVER['REQUEST_METHOD'];
@@ -34,14 +34,12 @@ class Request{
             }else{
                 return false;
             }
-        }else if($this->method()=='POST'){
+        }else{
             if(isset($_POST[$key])){
                 return $_POST[$key];
             }else{
                 return false;
             }
-        }else{
-            return false;
         }
     }
 
@@ -53,16 +51,16 @@ class Request{
             }else{
                 throw new \Exception("there no request parameters");
             }
-        }else if($this->method()=='POST'){
+        }
             if(isset($_POST['_method'])){
                 unset($_POST['_method']);
                 return $_POST;
             }else{
                 return $_POST;
             }
-        }else{
-            throw new \Exception("unsupported method");
-        }
+
+        throw new \Exception("unsupported method");
+
     }
 
     public function getParameters($uri)

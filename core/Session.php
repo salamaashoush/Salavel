@@ -18,7 +18,14 @@ class Session
 
     public static function flash()
     {
-        echo self::$message;
+        $message=Self::$message;
+        echo
+        "<div class=\"ui positive message transition hidden\">
+                <i class=\"close icon\"></i>
+                <div class=\"header\">
+                        {$message}
+                </div>
+          </div>";
         self::$message=null;
     }
 

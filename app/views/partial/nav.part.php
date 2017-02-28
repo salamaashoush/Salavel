@@ -1,14 +1,24 @@
 <div class="ui large top inverted fixed main menu">
     <div class="ui container">
-        <a class="item active" href="/">
+        <a class="item" href="/">
             Home
         </a>
         <a class="item" href="/posts">
             Posts
         </a>
-        <a class="item " href="/users/<?php \App\Core\Session::getLoginUser()->id ?>">
+        <?php if(\App\Core\Session::isLogin()):?>
+        <a class="item " href="/users/<?= \App\Core\Session::getLoginUser()->id ?>">
             Profile
         </a>
+            <a class="item " href="/users/<?= \App\Core\Session::getLoginUser()->id ?>\edit">
+                Edit Info
+            </a>
+        <?php endif;?>
+        <?php if(\App\Core\Session::getLoginUser()->role="admin"):?>
+        <a class="item " href="admin">
+            Admin
+        </a>
+        <?php endif;?>
         <div class="right menu">
             <div class="ui category search item">
                 <div class="ui transparent icon input">

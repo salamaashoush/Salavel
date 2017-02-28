@@ -41,8 +41,6 @@ class AuthController extends Controller
 
             if ($errors) {
                 $request->saveToSession($errors);
-                var_dump($errors);
-                die();
                 redirect('login', $request->getLastFromSession());
             } else {
                 redirect('posts');
@@ -54,10 +52,9 @@ class AuthController extends Controller
 
     public function logout()
     {
-        echo "logout";
         Session::destroy();
         Session::forgetLogin();
-        echo $_SESSION['username'];
+        redirect('/');
     }
 
     public function showregister(Request $request)

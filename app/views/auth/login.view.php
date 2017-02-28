@@ -32,20 +32,28 @@ $oldreq = \App\Core\Session::get('request');
                         <input type="password" name="password" placeholder="Password">
                     </div>
                 </div>
+                <div class="inline field">
+                    <div class="ui toggle checkbox">
+                        <input type="checkbox" tabindex="0" class="hidden" name="remember">
+                        <label>Remember Me</label>
+                    </div>
+                </div>
                 <input type="submit" value="Login" class="ui fluid large teal submit button">
             </div>
-            <?php if ($oldreq): ?>
-                <div class="ui error message">
-                    <div class="header">Validation Errors</div>
-                    <?php partial('errors', ['errors' => $oldreq['errors']]) ?>
-                </div>
-            <?php endif; ?>
+
         </form>
 
         <div class="ui message">
             New to us? <a href="/register">Sign Up</a>
         </div>
+        <?php if (!is_null($oldreq['errors'])): ?>
+            <div class="ui error message">
+                <div class="header">Validation Errors</div>
+                <?php partial('errors', ['errors' => $oldreq['errors']]) ?>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
+
 <?php partial('footer'); ?>
 

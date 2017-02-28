@@ -5,23 +5,9 @@ resource("js","semantic.min");
 ?>
 
 <script>
-    $.fn.api.settings.api={
-        'search':'http://localhost:8080/search?q={value}'
-    }
-    var content=[];
-    $('#search').api({
-        action:'search',
-        onSuccess:function(response){
-
-            response.forEach(function(r){
-                $('.results').append(`<p>${r.title}</p>`);
-                content.push({title:r.title});
-                console.log(r);
-            });
-        }
-    });
-    $('#search').search({
-        source: content
+    $('.ui.checkbox').checkbox();
+    $('.special.cards .image').dimmer({
+        on: 'hover'
     });
 </script>
 </body>

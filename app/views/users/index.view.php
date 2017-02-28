@@ -1,23 +1,30 @@
-<?php
-$errors=getErrors();
-?>
-<?php partial('header', ['title' => "about"]); ?>
-<h1>Users</h1>
-<?php foreach ($users as $user): ?>
-    <p>Name: <?=$user->username?>
-        <?php start_form("DELETE","/users/".$user->id)?>
-        <input type="submit" value="Delete">
-        <?php close_form();?>
-    </p>
-<?php endforeach; ?>
-<?php start_form("post","/users")?>
-    <label for="name">Name</label>
-    <input type="text" name="name"><br>
-    <label for="name">Email</label>
-    <input type="text" name="email"><br>
-    <label for="name">Password</label>
-    <input type="text" name="password"><br>
-    <input type="submit" value="Add">
-<?php close_form();?>
-<?php partial('errors',['errors'=>$errors])?>
+<?php partial('header', ['title' => 'Users']); ?>
+<?php if (\App\Core\Session::getLoginUser()->role == 'admin'): ?>
+    <?php if (!is_null($users)): ?>
+        <div style="padding-top:100px">
+            <div class="ui special cards">
+                <?php foreach ($users as $user): ?>
+                    <?php partial('user', ['user' => $user]); ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php else: ?>
+    <div class="ui middle aligned center aligned grid" style=padding: 300px">
+    <div class="column">
+        <div class="ui vertical beg segment transition visible">
+            <div class="ui red header">
+                <i class="disabled warning sign icon"></i>
+                <div class="content">
+                    <h1>You are not allowed here</h1>
+                    <div class="sub header">
+                        <p>You are not allowed here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<?php endif; ?>
 <?php partial('footer'); ?>
+

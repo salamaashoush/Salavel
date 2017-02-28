@@ -35,10 +35,10 @@ function resource($type, $name)
     return public_dir()."${type}/${name}.${type}";
 }
 function html_image($name,$option=['class'=>'','id'=>'']){
-    echo '<img src="' . public_dir()."images/${name}" . '" class="'.$option['class'].'id="'.$option['id'].'">';
+    echo '<img src="' . public_dir()."images/${name}" . '" class="'.$option['class'].'" id="'.$option['id'].'">';
 }
 function uploaded_image($name,$option=['class'=>'','id'=>'']){
-    echo '<img src="' . "/uploads/${name}" . '" class="'.$option['class'].'id="'.$option['id'].'">';
+    echo '<img src="' . "/uploads/${name}" . '" class="'.$option['class'].'" id="'.$option['id'].'">';
 }
 function html_link($url,$text,$option=['class'=>'','id'=>'']){
     echo '<a href="' .$url. '" class="'.$option['class'].'" id="'.$option['id'].'">'.$text."</a>";
@@ -46,18 +46,18 @@ function html_link($url,$text,$option=['class'=>'','id'=>'']){
 
 function method_field($method)
 {
-    return '<input type="hidden" name="_method" value=' . $method . ' />';
+    echo '<input type="hidden" name="_method" value=' . $method . ' />';
 }
 
-function start_form($method, $action, $option = null)
+function start_form($method, $action, $option = ['class'=>''])
 {
     if ($method === 'post' || $method === 'get') {
         echo '<form action="' . $action . '" method="' . $method . '" >';
-        echo csrf_field();
+        csrf_field();
     } else {
-        echo '<form action="' . $action . '" method="post" ' . '>';
-        echo method_field($method);
-        echo csrf_field();
+        echo '<form action="' . $action . '" method="post" class="' . $option['class'].'">';
+        method_field($method);
+        csrf_field();
 
     }
 }
@@ -88,7 +88,7 @@ function verifyCSRF($request)
 
 function csrf_field()
 {
-    return '<input type="hidden" name="_token" value=' . generateCSRF() . ' />';
+    echo '<input type="hidden" name="_token" value=' . generateCSRF() . ' />';
 }
 
 function getErrors()

@@ -6,13 +6,17 @@ $errors = getErrors();
 <div class="ui container">
     <h1>New Post</h1>
     <div class="column">
-        <form class="ui large form" method="post" action="/posts/">
+        <form class="ui large form" method="post" action="/posts/" enctype="multipart/form-data">
             <?= csrf_field() ?>
             <div class="ui stacked segment">
                 <div class="field">
                     <div class="ui input">
                         <input type="text" name="title" placeholder="Title">
                     </div>
+                </div>
+                <div class="field">
+                    <label>Image</label>
+                    <input type="file" name="image">
                 </div>
                 <div class="field">
                     <textarea name="body" id="" cols="30" rows="10"></textarea>
