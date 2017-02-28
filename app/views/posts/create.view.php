@@ -1,8 +1,8 @@
 <?php
 $errors = getErrors();
-
 ?>
-<?php partial('header', ['title' => "about"]); ?>
+<?php partial('header', ['title' => "New Post"]); ?>
+<?php if(\App\Core\Session::isLogin()):?>
 <div class="ui container">
     <h1>New Post</h1>
     <div class="column">
@@ -27,5 +27,21 @@ $errors = getErrors();
     </div>
     <?php partial('errors', ['errors' => $errors]) ?>
 </div>
-
+<?php else:?>
+    <div class="ui middle aligned center aligned grid" style="margin-top: 200px;margin-left:200">
+        <div class="column">
+            <div class="ui vertical beg segment transition visible" >
+                <div class="ui red header">
+                    <i class="disabled warning sign icon"></i>
+                    <div class="content">
+                        <h1>You cant create Posts now!!</h1>
+                        <div class="sub header">
+                            <p>Please login first</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif;?>
 <?php partial('footer'); ?>

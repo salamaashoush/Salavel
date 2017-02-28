@@ -89,7 +89,8 @@ class Router{
                 );
             }
         }else{
-            throw new \Exception("No route defined for this URI");
+
+            throw new \Exception(view('404'));
         }
 
     }

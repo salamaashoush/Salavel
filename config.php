@@ -9,4 +9,14 @@ return [
             PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
         ]
     ]
+    ,
+    'rss'=>[
+        "title" => "salama.com",
+        "link" => "http://www.salamablog.com",
+        "description" => "Salama blog",
+        "language" => "en",  // optional
+        "image_title" => "http://www.salamablog.com", // optional
+        "image_link" => "http://www.salamablog.com", // optional
+        "image_url" => "http://www.salamablog.com" // optional
+    ]
 ];
