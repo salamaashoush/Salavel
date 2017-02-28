@@ -20,7 +20,7 @@ class PostController extends Controller implements ResourceInterface
     public function index()
     {
         $posts=Post::all();
-        toJson($posts);
+        return view('posts/index',['posts'=>$posts]);
     }
 
     public function create()
@@ -50,7 +50,8 @@ class PostController extends Controller implements ResourceInterface
     public function show($id)
     {
        $post=Post::retrieveByPK($id);
-       return toJson($post);
+//       var_dump($post->comments());
+       return view('posts/show',['post'=>$post]);
     }
 
     public function edit($id)

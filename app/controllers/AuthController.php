@@ -14,9 +14,7 @@ class AuthController extends Controller
     public function showlogin()
     {
         if (Session::isLogin()) {
-//            redirect('index');
-            echo "already login";
-            echo $_SESSION['username'];
+            redirect('posts');
         }
         return view('auth/login');
 
@@ -47,9 +45,7 @@ class AuthController extends Controller
                 die();
                 redirect('login', $request->getLastFromSession());
             } else {
-//            return view('auth/profile');
-                echo "Doneeeeeee";
-                die();
+                redirect('posts');
             }
         } else {
             echo "not allowed";

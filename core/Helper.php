@@ -41,7 +41,7 @@ function uploaded_image($name,$option=['class'=>'','id'=>'']){
     echo '<img src="' . "/uploads/${name}" . '" class="'.$option['class'].'id="'.$option['id'].'">';
 }
 function html_link($url,$text,$option=['class'=>'','id'=>'']){
-    echo '<a href="' .$url. '" class="'.$option['class'].'id="'.$option['id'].'">'.$text."</a>";
+    echo '<a href="' .$url. '" class="'.$option['class'].'" id="'.$option['id'].'">'.$text."</a>";
 }
 
 function method_field($method)

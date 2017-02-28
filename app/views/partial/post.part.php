@@ -3,7 +3,7 @@
         <?=html_image($post->image)?>
     </div>
     <div class="content">
-        <a class="header"><?=$post->title?></a>
+        <?php html_link("posts/".$post->id,$post->title,['class'=>'header'])?>
         <div class="meta">
             <span>Author: <?php html_link("users/".$post->user()->id,$post->user()->username)?></span>
             <span>Last edit: <?=$post->updated_at?></span>
@@ -11,6 +11,7 @@
         <div class="description">
             <p><?=$post->body?></p>
         </div>
+        <?php if(\App\Core\Session::isLogin()):?>
         <div class="extra">
             <div class="ui small buttons">
                 <?php start_form('get',"/posts/".$post->id."/edit")?>
@@ -21,5 +22,6 @@
                 <?php close_form()?>
             </div>
         </div>
+        <?php endif;?>
     </div>
 </div>

@@ -1,5 +1,7 @@
 <?php
 namespace App\Core;
+use App\Models\User;
+
 class Session
 {
     protected static $message;
@@ -101,4 +103,8 @@ class Session
         return false;
     }
 
+    public static function getLoginUser()
+    {
+        return User::retrieveByUsername(self::get('username'))[0];
+    }
 }

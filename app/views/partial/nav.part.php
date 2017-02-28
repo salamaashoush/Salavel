@@ -5,7 +5,7 @@
     <a class="item" href="/posts">
         Posts
     </a>
-    <a class="item active" href="/users/<?php $user->id ?>">
+    <a class="item active" href="/users/<?php \App\Core\Session::getLoginUser()->id ?>">
         Profile
     </a>
     <div class="right menu">
