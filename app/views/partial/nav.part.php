@@ -22,8 +22,11 @@
         <div class="right menu">
             <div class="ui category search item">
                 <div class="ui transparent icon input">
-                    <input id="search" class="prompt" type="text" placeholder="Search posts...">
-                    <i class="search link icon"></i>
+                    <form action="/search" method="get">
+                        <input id="search" name="search" class="prompt" type="text" placeholder="Search posts...">
+                        <button type="submit"><i class="search link icon"></i></button>
+                    </form>
+
                 </div>
                 <div class="results"></div>
             </div>
