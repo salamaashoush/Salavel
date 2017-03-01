@@ -12,8 +12,10 @@ if(App::get('config')['heroku']){
         'options'=>[
             PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
         ]]));
+}else{
+    \App\Core\DB\ORM::useConnection(Connection::make(App::get('config')['database']));
 }
-\App\Core\DB\ORM::useConnection(Connection::make(App::get('config')['database']));
+
 
 require 'core/Helper.php';
 
