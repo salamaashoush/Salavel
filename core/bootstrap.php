@@ -11,7 +11,7 @@ if(App::get('config')['heroku']){
         'connection'=>'mysql:host='.$url["host"].';',
         'options'=>[
             PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
-        ]));
+        ]]));
 }
 \App\Core\DB\ORM::useConnection(Connection::make(App::get('config')['database']));
 

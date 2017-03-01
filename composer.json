@@ -1,4 +1,11 @@
 {
+    "require": {
+        "ext-mysql": "*",
+        "ext-gettext": "*"
+    },
+    "require-dev": {
+        "heroku/heroku-buildpack-php": "*"
+    },
     "autoload":{
         "classmap":[
             "./"
