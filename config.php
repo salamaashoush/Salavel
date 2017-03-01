@@ -10,7 +10,7 @@ return [
         ]
     ]
     ,
-    'heroku'=>false
+    'heroku'=>true
     ,
     'rss'=>[
         "title" => "salama.com",
