@@ -135,13 +135,6 @@ $oldreq = \App\Core\Session::get('request') ;
             </div>
         </div>
         <div class="field">
-            <label>Role</label>
-            <select class="ui fluid dropdown" name="role">
-                <option value="egypt">Admin</option>
-                <option value="other">User</option>
-            </select>
-        </div>
-        <div class="field">
             <label>Image</label>
             <input type="file" name="image" >
         </div>

@@ -124,7 +124,7 @@ class UserController extends Controller implements ResourceInterface
             $user->updated_at = date("Y-m-d H:i:s");
             $user->update();
             Session::setFlash("User Updated Successfully");
-            redirect('users');
+            redirect('/users');
         }
     }
 
@@ -133,6 +133,6 @@ class UserController extends Controller implements ResourceInterface
         $user=User::retrieveByPK($id);
         $user->delete();
         Session::setFlash("User Deleted Successfully");
-        redirect('users');
+        redirect('/users');
     }
 }

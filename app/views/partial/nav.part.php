@@ -15,7 +15,7 @@
             </a>
         <?php endif; ?>
         <?php if (\App\Core\Session::getLoginUser()->role == "admin"): ?>
-            <a class="item " href="admin">
+            <a class="item " href="/admin">
                 Admin
             </a>
         <?php endif; ?>

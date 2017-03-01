@@ -5,7 +5,7 @@
     <div class="content">
         <?php html_link("/posts/".$post->id,$post->title,['class'=>'header'])?>
         <div class="meta">
-            <span>Author: <?php html_link("users/".$post->user()->id,$post->user()->username)?></span>
+            <span>Author: <?php html_link("/users/".$post->user()->id,$post->user()->username)?></span>
             <span>Last edit: <?=$post->updated_at?></span>
         </div>
         <div class="description">

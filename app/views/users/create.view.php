@@ -70,8 +70,8 @@ $oldreq = \App\Core\Session::get('request') ;
             <div class="field">
                 <label>Role</label>
                 <select class="ui fluid dropdown" name="role">
-                    <option value="egypt">Admin</option>
-                    <option value="other">User</option>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
                 </select>
             </div>
             <div class="field">
@@ -145,8 +145,8 @@ $oldreq = \App\Core\Session::get('request') ;
             <div class="field">
                 <label>Role</label>
                 <select class="ui fluid dropdown" name="role">
-                    <option value="egypt">Admin</option>
-                    <option value="other">User</option>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
                 </select>
             </div>
             <div class="field">

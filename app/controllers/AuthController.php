@@ -45,9 +45,9 @@ class AuthController extends Controller
 
             if ($errors) {
                 $request->saveToSession($errors);
-                redirect('login', $request->getLastFromSession());
+                redirect('/login', $request->getLastFromSession());
             } else {
-                redirect('posts');
+                redirect('/posts');
             }
         } else {
             echo "not allowed";
@@ -64,7 +64,7 @@ class AuthController extends Controller
     public function showregister(Request $request)
     {
         if (Session::isLogin()) {
-            redirect('pages/home');
+            redirect('/');
         }
         return view('auth/register');
     }
@@ -105,7 +105,7 @@ class AuthController extends Controller
             $user->created_at = date("Y-m-d H:i:s");
             $user->updated_at = date("Y-m-d H:i:s");
             $user->save();
-            redirect('login');
+            redirect('/login');
         }
 
     }

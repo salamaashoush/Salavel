@@ -97,6 +97,6 @@ class PostController extends Controller implements ResourceInterface
         $post=Post::retrieveByPK($id);
         $post->delete();
         Session::setFlash("Post Deleted Successfully");
-        redirect('posts');
+        redirect('/posts');
     }
 }
