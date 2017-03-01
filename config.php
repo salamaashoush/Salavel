@@ -10,6 +10,8 @@ return [
         ]
     ]
     ,
+    'heroku'=>true
+    ,
     'rss'=>[
         "title" => "salama.com",
         "link" => "http://www.salamablog.com",
