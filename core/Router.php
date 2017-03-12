@@ -90,7 +90,7 @@ class Router{
             }
         }else{
 
-            throw new \Exception(view('404'));
+            throw new \Exception(view('errors/404'));
         }
 
     }
@@ -98,7 +98,7 @@ class Router{
 
     protected function callAction($request,$controller,$action)
     {
-        $controller="App\\Controllers\\{$controller}";
+        $controller="\\App\\Controllers\\{$controller}";
         $controller=new $controller();
         $urientry=explode("/",$request->uri())[0];
         $id=$request->getParameters($urientry);

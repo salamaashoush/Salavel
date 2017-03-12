@@ -12,7 +12,9 @@ abstract class ORM
         $loadMethod,
         $loadData,
         $modifiedFields = array(),
+        $lastRecord,
         $isNew = false;
+
 
     protected
         $parentObject,
@@ -377,7 +379,9 @@ abstract class ORM
         try{
             $stmt = self::getConnection()->prepare($sql);
             $stmt->execute($params);
+
             // set our PK (if exists)
+            $this->lastRecord = self::getConnection()->lastInsertId();
             if (self::getConnection()->lastInsertId())
                 $this->{self::getTablePk()} = self::getConnection()->lastInsertId();
 
@@ -391,6 +395,8 @@ abstract class ORM
             $this->postInsert();
         }catch (\Exception $e){
             $e->getMessage();
+
+            var_dump($e->getMessage());
         }
 
 
@@ -437,11 +443,11 @@ abstract class ORM
         // build sql statement
         $sql = sprintf("UPDATE %s SET %s WHERE %s = :$pk",self::getTableName(), implode(', ', $fields), $pk);
         // prepare, bind & execute
-
         try{
             $stmt = self::getConnection()->prepare($sql);
             $stmt->execute($params);
         }catch (\Exception $e){
+//            dispalyForDebug($e);die();
             $e->getMessage();
         }
 
@@ -844,5 +850,12 @@ abstract class ORM
             $values[$object->id()] = (string) $object;
 
         return $values;
+    }
+
+
+
+    public  function  getLastInserted()
+    {
+        return $this->lastRecord;
     }
 }

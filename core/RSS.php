@@ -8,7 +8,7 @@
 
 namespace App\Core;
 
-use App\Models\Post;
+use App\Models\Course;
 
 class RSS  {
 
@@ -98,26 +98,26 @@ class RSS  {
         // get rss items according to http://www.rssboard.org/rss-specification
         $a_rss_items = [];
         $a_rss_item = [];
-        $posts= Post::all();
-        foreach($posts as $post) {
+        $courses= Course::all();
+        foreach($courses as $course) {
 
             // title
-            $a_rss_item['title'] = $post->title;
+            $a_rss_item['title'] = $course->title;
 
             // link
-            $a_rss_item['link'] = $this->site_url . '/posts/' . $post->id;
+            $a_rss_item['link'] = $this->site_url . '/courses/' . $course->id;
 
             // description
-            $a_rss_item['description'] = '';
+            $a_rss_item['description'] = $course->description;
 
-            if($post->image) {
-                $img_url = $this->site_url . "/uploads/".$post->image;
-                $a_rss_item['description'] = '<img src="' . $img_url . '" hspace="5" vspace="5" align="left"/>';
+            if($course->image) {
+                $img_url = $this->site_url .$course->image;
+                $a_rss_item['description'] ='<img src="' . $img_url . '" hspace="5" vspace="5" align="left"/></br>' .$course->description;
             }
 //            $a_rss_item['description'] .= $topic['description'];
 
             // pubdate -> configure appropriately to your environment
-            $date = new \DateTime($post->updated_at);
+            $date = new \DateTime($course->updated_at);
             $a_rss_item['pubDate'] = $date->format("D, d M Y H:i:s O");
 
             // category
@@ -128,7 +128,7 @@ class RSS  {
 
             if($this->full_feed) {
                 // content
-                $a_rss_item['content'] = '<![CDATA[' . $post->body .  ']]>';
+                $a_rss_item['content'] = '<![CDATA[' . $course->body .  ']]>';
             }
 
             array_push($a_rss_items, $a_rss_item);

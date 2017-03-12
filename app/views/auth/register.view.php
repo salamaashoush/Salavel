@@ -1,145 +1,137 @@
+<html>
 <?php
-$oldreq = \App\Core\Session::get('request') ;
-\App\Core\Session::delete('request');
+$request=\App\Core\Session::get('request');
+$error=$request['errors'];
+$fields=$request['fields'];
 ?>
-<?php partial('header', ['title' => "Register"]); ?>
-<?php if ($oldreq): ?>
-    <div class="ui container">
-        <h1 class="ui header">User Registration</h1>
-        <form class="ui form" action="/register" method="post" enctype="multipart/form-data">
-            <h4 class="ui dividing header">User Information</h4>
-            <div class="field">
-                <label>Name</label>
-                <div class="two fields">
-                    <div class="field">
-                        <input type="text" name="firstname" placeholder="First Name"
-                               value="<?= $oldreq['fields']['firstname'] ?>">
-                    </div>
-                    <div class="field">
-                        <input type="text" name="lastname" placeholder="Last Name"
-                               value="<?= $oldreq['fields']['lastname'] ?>">
-                    </div>
-                </div>
-            </div>
-            <div class="two fields">
-                <div class="field">
-                    <label>User Name</label>
-                    <input type="text" name="username" placeholder="User Name"
-                           value="<?= $oldreq['fields']['username'] ?>" >
-                </div>
-                <div class=" field">
-                    <label>Email</label>
-                    <input type="text" name="email" placeholder="email" value="<?= $oldreq['fields']['email'] ?>">
-                </div>
-            </div>
-            <div class=" field">
-                <label>Password</label>
-                <div class="two fields">
-                    <div class="field">
-                        <input type="password" name="password" placeholder="Password"
-                               value="<?= $oldreq['fields']['password'] ?>">
-                    </div>
-                    <div class=" field">
-                        <input type="password" name="confirm" placeholder="Confirm Password"
-                               value="<?= $oldreq['fields']['confirm'] ?>">
-                    </div>
-                </div>
-            </div>
-            <div class="field">
-                <label>Address</label>
-                <input type="text" name="address" placeholder="Street Address"
-                       value="<?= $oldreq['fields']['address'] ?>">
-            </div>
-            <div class=" two fields">
-                <div class="field">
-                    <label>Gender</label>
-                    <select class="ui fluid dropdown" name="gender">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label>Country</label>
-                    <select class="ui fluid dropdown" name="country">
-                        <option value="egypt">Egypt</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-            </div>
-            <div class="field">
-                <label>Image</label>
-                <input type="file" name="image" >
-            </div>
-            <div class="ui input" tabindex="0"><input type="submit" value="Submit"></div>
-        </form>
-        <div class="ui error message">
-            <div class="header">Validation Errors</div>
-            <?php partial('errors', ['errors' => $oldreq['errors']]) ?>
-        </div>
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="<?=asset('favicon.ico')?>" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Open Source LMS| Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="<?php asset('css/bootstrap.min.css')?>">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="<?php asset('css/font-awesome.min.css')?>">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="<?php asset('css/ionicons.min.css')?>">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?php asset('css/AdminLTE.min.css')?>">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="<?php asset('js/plugins/iCheck/square/blue.css')?>">
+
+</head>
+<body class="hold-transition login-page" style="background: url('../../../public/img/loginback.jpg') no-repeat;background-size: cover ">
+<?php if(\App\Core\Session::has('message')):?>
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Alert!</h4>
+        <p><?= \App\Core\Session::get('message')?></p>
+        <?php \App\Core\Session::delete('message')?>
     </div>
-<?php else:?>
-<div class="ui container">
-    <h1 class="ui header">User Registration</h1>
-    <form class="ui form" action="/register" method="post" enctype="multipart/form-data">
-        <h4 class="ui dividing header">User Information</h4>
-        <div class="field">
-            <label>Name</label>
-            <div class="two fields">
-                <div class="field">
-                    <input type="text" name="firstname" placeholder="First Name">
-                </div>
-                <div class="field">
-                    <input type="text" name="lastname" placeholder="Last Name">
-                </div>
-            </div>
-        </div>
-        <div class="two fields">
-            <div class="field">
-                <label>User Name</label>
-                <input type="text" name="username" placeholder="User Name">
-            </div>
-            <div class=" field">
-                <label>Email</label>
-                <input type="text" name="email" placeholder="email">
-            </div>
-        </div>
-        <div class=" field">
-            <label>Password</label>
-            <div class="two fields">
-                <div class="field">
-                    <input type="password" name="password" placeholder="Password">
-                </div>
-                <div class=" field">
-                    <input type="password" name="confirm" placeholder="Confirm Password">
-                </div>
-            </div>
-        </div>
-        <div class="field">
-            <label>Address</label>
-            <input type="text" name="address" placeholder="Street Address">
-        </div>
-        <div class=" two fields">
-            <div class="field">
-                <label>Gender</label>
-                <select class="ui fluid dropdown" name="gender">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Country</label>
-                <select class="ui fluid dropdown" name="country">
-                    <option value="egypt">Egypt</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-        </div>
-        <div class="field">
-            <label>Image</label>
-            <input type="file" name="image" >
-        </div>
-        <div class="ui input" tabindex="0"><input type="submit" value="Submit"></div>
-    </form>
-</div>
 <?php endif;?>
-<?php partial('footer'); ?>
+<?php if(\App\Core\Session::has('error')):?>
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Alert!</h4>
+        <p><?= \App\Core\Session::get('error')?></p>
+        <?php \App\Core\Session::delete('error')?>
+    </div>
+<?php endif;?>
+<?php if(\App\Core\Session::has('urlerror')):?>
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Alert!</h4>
+        <p><?= \App\Core\Session::get('urlerror')?></p>
+        <?php \App\Core\Session::delete('urlerror')?>
+        <i class="icon fa fa-arrow-circle-o-right"></i><a href="<?php \App\Core\Session::get('url')?>" class="btn-link">Go here</a>
+    </div>
+<?php endif;?>
+<div class="register-box">
+    <div class="register-logo">
+        <a href="/">
+            <img src="<?php asset('img/logo.png')?>" alt="" width="100px"><br>
+            <b>Inform</b>Me
+        </a>
+    </div>
+
+    <div class="register-box-body">
+        <p class="login-box-msg">Register a new membership</p>
+
+        <form method="POST" action="/register">
+            <?php csrf_field()?>
+            <div class="form-group has-feedback <?= isset($errors['name']) ? ' has-error' : '' ?>">
+                <input type="text" class="form-control" placeholder="User name" name="username" value="<?= $fields['name'] ?>">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <?php if(count($errors)>0):?>
+                    <span class="help-block">
+                        <strong><?= $errors['name'] ?></strong>
+                </span>
+                <?php endif;?>
+            </div>
+            <div class="form-group has-feedback <?= isset($errors['email']) ? ' has-error' : '' ?>">
+                <input type="email" class="form-control" placeholder="Email" name="email" value="<?= $fields['email'] ?>">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <?php if(count($errors)>0):?>
+                    <span class="help-block">
+                        <strong><?= $errors['email'] ?></strong>
+                </span>
+                <?php endif;?>
+            </div>
+            <div class="form-group has-feedback<?= isset($errors['password']) ? ' has-error' : '' ?>">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <?php if(count($errors)>0):?>
+                    <span class="help-block">
+                        <strong><?= $errors['password'] ?></strong>
+                </span>
+                <?php endif;?>
+            </div>
+            <div class="form-group has-feedback <?= isset($errors['confirm']) ? ' has-error' : '' ?>">
+                <input type="password" class="form-control" placeholder="Retype password" name="confirm">
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                <?php if(count($errors)>0):?>
+                    <span class="help-block">
+                        <strong><?= $errors['confirm'] ?></strong>
+                </span>
+                <?php endif;?>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> I agree to the <a href="#">terms</a>
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+        <a href="/login" class="text-center">I already have a membership</a>
+    </div>
+    <!-- /.form-box -->
+</div>
+
+<!-- jQuery 2.2.0 -->
+<script src="<?php asset('js/jquery-3.1.1.min.js')?>"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="<?php asset('js/bootstrap.min.js')?>"></script>
+<!-- iCheck -->
+<script src="<?php asset('js/plugins/iCheck/icheck.min.js')?>"></script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
+</body>
+</html>

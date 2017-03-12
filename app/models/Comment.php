@@ -2,13 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: salamaashoush
- * Date: 22/02/17
- * Time: 12:16 م
+ * Date: 08/03/17
+ * Time: 06:59 ص
  */
 
 namespace App\Models;
 
 
+use App\Core\App;
 use App\Core\DB\ORM;
 
 class Comment extends ORM
@@ -18,10 +19,13 @@ class Comment extends ORM
 
     public function user()
     {
-        return User::retrieveByField('id',$this->uid)[0];
+        return User::retrieveByPK($this->uid);
     }
-    public function post()
+
+    public function model()
     {
-        return Post::retrieveByField('id',$this->pid)[0];
+        $model=explode(":",$this->mid)[0];
+        $modelid=explode(":",$this->mid)[1];
+        return $model::retrieveByPK($modelid);
     }
 }

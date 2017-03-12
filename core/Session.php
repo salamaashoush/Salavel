@@ -4,29 +4,12 @@ use App\Models\User;
 
 class Session
 {
-    protected static $message;
-
-    public static function setFlash($message)
+    public static function has($key)
     {
-        self::$message=$message;
-    }
-
-    public static function hasFlash()
-    {
-        return !is_null(self::$message);
-    }
-
-    public static function flash()
-    {
-        $message=Self::$message;
-        echo
-        "<div class=\"ui positive message transition hidden\">
-                <i class=\"close icon\"></i>
-                <div class=\"header\">
-                        {$message}
-                </div>
-          </div>";
-        self::$message=null;
+        if(isset($_SESSION[$key])){
+            return true;
+        }
+        return false;
     }
 
     public static function set($key,$value)
@@ -71,7 +54,7 @@ class Session
     public static function getCookie($cookie)
     {
         if(isset($_COOKIE[$cookie])) {
-           return $cookie;
+           return $_COOKIE[$cookie];
         } else {
             return null;
         }
@@ -81,18 +64,26 @@ class Session
         setcookie($cookie, "", time() - 3600);
     }
 
-    public static function saveLogin($username,$role,$password)
+    public static function saveLogin($username,$role,$password,$isbaned=false)
     {
         self::set('username',$username);
         self::set('password',$password);
         self::set('role',$role);
+        if($isbaned){
+            self::set('isbaned',true);
+        }
+
     }
 
-    public static function rememberLogin($username,$role,$password)
+    public static function rememberLogin($username,$role,$password,$isbaned=false)
     {
         self::setCookie('username',$username);
         self::setCookie('password',$password);
         self::setCookie('role',$role);
+        if($isbaned){
+            self::setCookie('isbaned',true);
+        }
+
     }
 
     public static function forgetLogin()
@@ -100,8 +91,14 @@ class Session
         self::deleteCookie('username');
         self::deleteCookie('password');
         self::deleteCookie('role');
+        self::deleteCookie('isbaned');
     }
-
+    public function isBaned(){
+        if(self::get('isbaned')||self::getCookie('isbaned')){
+            return true;
+        }
+        return false;
+    }
     public static function isLogin()
     {
         if(self::get('username')||self::getCookie('username')){
@@ -112,6 +109,20 @@ class Session
 
     public static function getLoginUser()
     {
-        return User::retrieveByUsername(self::get('username'))[0];
+        if(self::get('username')){
+            return User::retrieveByUsername(self::get('username'))[0];
+        }else{
+            return User::retrieveByUsername(self::getCookie('username'))[0];
+        }
+
+    }
+    public static function saveBackUrl(){
+        self::set('back_url',$_SERVER['REQUEST_URI']);
+    }
+
+    public static function getBackUrl(){
+        $url=self::get('back_url');
+        self::delete('back_url');
+        return $url;
     }
 }

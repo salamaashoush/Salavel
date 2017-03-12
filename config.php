@@ -1,7 +1,7 @@
 <?php
 return [
     'database'=>[
-        'name'=>'salamadb',
+        'name'=>'lms',
         'username'=>'root',
         'password'=>'root',
         'connection'=>'mysql:host=localhost;',
@@ -13,12 +13,9 @@ return [
     'heroku'=>true
     ,
     'rss'=>[
-        "title" => "salama.com",
-        "link" => "http://www.salamablog.com",
-        "description" => "Salama blog",
+        "title" => "Open Source LMS Courses",
+        "link" => "http://opensourcelms.herokuapp.com",
+        "description" => "Open Source LMS Courses",
         "language" => "en",  // optional
-        "image_title" => "http://www.salamablog.com", // optional
-        "image_link" => "http://www.salamablog.com", // optional
-        "image_url" => "http://www.salamablog.com" // optional
     ]
 ];
