@@ -21,9 +21,9 @@ class AuthController extends Controller
                 redirect('/users');
             else
                 redirect('/users/'.Session::getLoginUser()->id);
+        }else{
+            return view('auth/login');
         }
-        else
-        return view('auth/login');
 
     }
     public function admin()
@@ -46,13 +46,9 @@ class AuthController extends Controller
             if(!$errors){
                 $user = User::retrieveByEmail($request->get('email'))[0];
                 if ($request->get('email') == $user->email && password_verify($request->get('password'), $user->password)) {
-                    if($user->state=="baned"){
-                        Session::set('error',"you have been baned from login !!!");
-                        redirect('/login', $request->getLastFromSession());
-                    }
-                    if ($user->state != "active")
+                    if ($user->state != "active" || $user->state=="baned")
                     {
-                        Session::set('error',"Your account not active <br/>please go to your mail to verify you account");
+                        Session::set('error',"Your account not active <br/>please go to your mail to verify you account or you have been baned");
                         redirect('/login', $request->getLastFromSession());
 
                     }

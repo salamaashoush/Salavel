@@ -91,21 +91,16 @@ class UserController extends Controller implements ResourceInterface
 
     public function show($id)
     {
-        if(Session::isLogin()){
-            try{
-                if (Session::isLogin()&&Session::getLoginUser()->id == $id|| Session::isLogin()&&Session::getLoginUser()->role == "admin")
-                {
-                    $user = User::retrieveByPK($id);
-                    return view('admin/users/show', ['user' => $user]);
-                }else{
-                    redirect('/login');
-                }
-            }catch (\Exception $e){
+        if(Session::isLogin()) {
+            try {
+                $user = User::retrieveByPK($id);
+                return view('admin/users/show', ['user' => $user]);
+            } catch (\Exception $e) {
                 return view('errors/404');
             }
         }else{
-            $reqs = UserRequest::all();
-            return view('admin/requests/index', ['reqs' => $reqs]);
+            Session::set('message','Please login first');
+            redirect('/login');
         }
 
 
@@ -177,13 +172,20 @@ class UserController extends Controller implements ResourceInterface
 
     public function destroy($id)
     {
-        if (Session::isLogin()&&Session::getLoginUser()->role == "admin"&&$id!=1) {
+        if (Session::isLogin()&&Session::getLoginUser()->role == "admin") {
             $user = User::retrieveByPK($id);
             delete_file($user->image);
             foreach ($user->requests() as $req){
                 $req->delete();
             }
+
             $user->delete();
+            if($id == Session::getLoginUser()->id)
+            {
+                Session::destroy();
+                Session::forgetLogin();
+                redirect('/');
+            }
             Session::set('message', "User Deleted Successfully");
             redirect('/users');
         }else{
