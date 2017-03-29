@@ -29,13 +29,21 @@ class Request {
 			if (isset($_GET[$key])) {
 				return $_GET[$key];
 			} else {
-				return false;
+				return null;
 			}
-		} else {
+		}elseif ($this->method() == 'PUT'){
+            parse_str(file_get_contents("php://input"),$_PUT);
+            if(isset($_PUT[$key])){
+                return $_PUT[$key];
+            }else{
+                return null;
+            }
+
+        } else {
 			if (isset($_POST[$key])) {
 				return $_POST[$key];
 			} else {
-				return false;
+				return null;
 			}
 		}
 	}
@@ -49,13 +57,20 @@ class Request {
 				throw new \Exception("there no request parameters");
 			}
 		}
-		if (isset($_POST['_method'])) {
-			unset($_POST['_method']);
-			return $_POST;
-		} else {
-			return $_POST;
-		}
+		if($this->method()=='POST'){
+            if (isset($_POST['_method'])) {
+                unset($_POST['_method']);
+                return $_POST;
+            } else {
+                return $_POST;
+            }
+        }
 
+        if ($this->method() == 'PUT'){
+            parse_str(file_get_contents("php://input"),$_PUT);
+            return $_PUT;
+
+        }
 		throw new \Exception("unsupported method");
 
 	}
